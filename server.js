@@ -36,7 +36,7 @@ var app = express()
 app.use(bodyParser.json())
 
 //serve static files from /dist directory
-app.use(express.static(path.join(__dirname, "student-sign-in\student-sign-in", "dist")))
+app.use(express.static(path.join(__dirname, "student-sign-in/student-sign-in", "dist")))
 
 app.use("/api", api_routes(student))
 
