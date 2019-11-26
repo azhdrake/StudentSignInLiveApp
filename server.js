@@ -3,16 +3,27 @@ var bodyParser = require("body-parser")
 var Sequelize = require("sequelize")
 var api_routes = require("./routes/api.js")
 
-//Database Config
-sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./db.sqlite3"
-})
+db_url = process.env.DATABASE_URL
 
-//Verify connection
-sequelize.authenticate()
-  .then(() => console.log("connected to sqlite"))
-  .catch(err => console.log("error connecting", err))
+let sequelize
+
+if (db_url) {
+  sequelize = new Sequelize(db_url, {
+    dialect: "postgress",
+  })
+
+  sequelize.authenticate()
+    .then(() => console.log("connected to Postgress"))
+    .catch(err => console.log(err))
+} else {
+  sequelize = new Sequelize({
+    dialect: "sqlite",
+    storage: "./db.sqlite3"
+  })
+  sequelize.authenticate()
+    .then(() => console.log("connected to sqlite"))
+    .catch(err => console.log("error connecting", err))
+}
 
 //init Student model
 let student = require("./model/student.js")(sequelize, Sequelize)
