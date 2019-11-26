@@ -2,6 +2,7 @@ var express = require("express")
 var bodyParser = require("body-parser")
 var Sequelize = require("sequelize")
 var api_routes = require("./routes/api.js")
+var path = require("path")
 
 db_url = process.env.DATABASE_URL
 
@@ -15,7 +16,9 @@ if (db_url) {
   sequelize.authenticate()
     .then(() => console.log("connected to Postgress"))
     .catch(err => console.log(err))
-} else {
+}
+
+else {
   sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "./db.sqlite3"
@@ -31,6 +34,9 @@ let student = require("./model/student.js")(sequelize, Sequelize)
 //app config
 var app = express()
 app.use(bodyParser.json())
+
+//serve static files from /dist directory
+app.use(express.static(path.join(__dirname, "student-sign-in\student-sign-in", "dist")))
 
 app.use("/api", api_routes(student))
 
