@@ -6,7 +6,7 @@ module.exports = function (Student) {
 
   router.get("/students", function (req, res, next) {
     //From context this is clearly a SELECT * FROM students statement but I'm not sure how it translates into that. Could we at some point talk about how sequelize statements work in JavaScript?
-    Student.findAll({ order: ["id"] }).then(students => {
+    Student.findAll({ order: ["starID"] }).then(students => {
       return res.json(students)
     }).catch(err=>next(err))
   })
