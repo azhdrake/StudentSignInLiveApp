@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
+  //forces the table to sync with the above settings.
   Student.sync({ force: true }).then(() => {
     console.log("synced table")
   })

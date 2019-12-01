@@ -27,7 +27,7 @@
 	export default{
 		name: "NewStudentForm",
 		data() {
-			return {
+      return {
 				newStudentName:"",
 				newStarID: "",
 				errors: []
@@ -46,7 +46,7 @@
 					this.$emit("student-added", student) //sends student information to parent component.
 					this.newStudentName = ""
 					this.newStarID = ""
-					this.errors = []
+					this.errors = [] //resets all fields to empty
 				}
 			}
 		}

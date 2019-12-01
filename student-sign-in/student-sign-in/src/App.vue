@@ -2,10 +2,12 @@
   <div id="app">
     <!--Recieves new student data from the newStudentForm, feeds the new student data to newStudentAdded()-->
     <NewStudentForm v-on:student-added="newStudentAdded"></NewStudentForm>
+
     <!--Feeds students array to StudentTable, listens for student-present and delete-student-->
 	  <StudentTable v-bind:students="students" 
-	  v-on:student-present="studentArrivedOrLeft"
-	  v-on:delete-student="studentDeleted"></StudentTable>
+	    v-on:student-present="studentArrivedOrLeft"
+	    v-on:delete-student="studentDeleted"></StudentTable>
+
     <!--Sends message and name to StudentMessage-->
 	  <StudentMessage v-bind:message="message" v-bind:name="name"></StudentMessage>
   </div>
@@ -35,6 +37,7 @@
     },
     methods: {
       newStudentAdded(student) {
+        //sends new student data to the database, and if everythings good updates the table, if something wrong alerts the user.
         this.$student_api.addStudent(student).then(student => {
           this.updateStudents()
         }).catch(err => {
@@ -43,6 +46,7 @@
         })
       },
       studentArrivedOrLeft(student) {
+        //checks to see if student is comming or going and sends message based on that. 
         this.$student_api.updateStudent(student).then(() => { 
           this.message = student.present ? "Welcome, " : "Goodbye, "
           this.name = student.name
@@ -50,6 +54,7 @@
         })
       },
       studentDeleted(student) {
+        //sends delete request, updates table
         this.$student_api.deleteStudent(student.id).then(() => {
           this.updateStudents()
         })

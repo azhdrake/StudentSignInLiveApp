@@ -1,6 +1,8 @@
 import axios from "axios"
 
 const base_url = "/api/students"
+
+//the functions that talk to the database. 
 export default {
   getAllStudents() {
     return axios.get(base_url).then(response => {

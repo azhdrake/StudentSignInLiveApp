@@ -4,10 +4,12 @@ var Sequelize = require("sequelize")
 var api_routes = require("./routes/api.js")
 var path = require("path")
 
+//heroku's enviromental variable for the database URL
 db_url = process.env.DATABASE_URL
 
 let sequelize
 
+//checks to see if there is the value of db_url is truethy, aka if the app is being hosted on heroku. If so, we're cooking with postgress. If not, we're cooking with sqlite
 if (db_url) {
   sequelize = new Sequelize(db_url, {
     dialect: "postgress",

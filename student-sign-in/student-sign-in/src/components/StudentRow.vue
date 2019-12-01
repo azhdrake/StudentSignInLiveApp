@@ -4,8 +4,8 @@
 		<td> {{ student.starID }} </td>
           <!-- when clicked changes student.present attribute and prepares that information for the checked(student) method.-->
 		<td> <input type="checkbox" 
-                v-model="student.present" 
-                v-on:change="checked(student)"></td>
+          v-model="student.present" 
+          v-on:change="checked(student)"></td>
     <!-- shows button if edit is checked. When clicked the button initiates the deleteStudent function. -->
 		<td v-show="edit"> 
 			<button id="delete-button" v-on:click="deleteStudent(student)">x</button>
@@ -21,11 +21,12 @@ export default {
 		edit: Boolean
 	},
 	methods: {
-		checked(student){
+    checked(student) {
+      //sends the present status update to StudentTable
 			this.$emit("student-present",student)
 		},
     deleteStudent(student) {
-      // makes sure you are really emotionally prepared to cull a child.
+      // makes sure you are really emotionally prepared to cull a child and sends the cull order off to StudentTable.
 			if(confirm(`Delete ${student.name}?`)){
 				this.$emit("delete-student", student)
 			}

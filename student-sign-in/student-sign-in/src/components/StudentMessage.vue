@@ -1,7 +1,7 @@
 <template>
 	<div class="hello">
 		<transition name="fade">
-			<div class="alert alert-success" v-if="seeMessage">
+			<div class="alert alert-success" v-if="seeMessage"> <!-- checks to see if it's an approprate time for message, shows if it is. -->
 				{{message}} {{name}}
 			</div>
 		</transition>

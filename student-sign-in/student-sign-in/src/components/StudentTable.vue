@@ -13,7 +13,7 @@
 				<th>Name</th>
 				<th>StarID</th>
 				<th>Present?</th>
-				<th v-show="editTable">Delete</th>
+				<th v-show="editTable">Delete</th> <!--Will only show if the edit table button hass been clicked-->
 			</tr>
 			<StudentRow
 				v-for="student in students" v-bind:key="student.name"
@@ -21,6 +21,7 @@
 				v-bind:edit="editTable"
 				v-on:student-present="studentArrivedOrLeft"
 				v-on:delete-student="studentDeleted">
+          <!-- Loop. For each student in the student array, send StudentRow the student and the value of the editTable boolean listen for student's present or delete status changing.  -->
 			</StudentRow>
 		</table>
 	</div>
@@ -36,7 +37,9 @@
 				editTable: false
 			}
 		},
-		components: { StudentRow },
+    components: {
+      StudentRow
+    },
 		props: {
 			students: Array
 		},
